@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', [LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login-form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/profile/{user}', [LoginController::class, 'showProfile'])->name('profile');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register-form');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');

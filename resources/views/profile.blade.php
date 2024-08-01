@@ -8,15 +8,29 @@
 <form>
     <div>
         <label>Tên</label>
-        <textarea>{{$user->name}}</textarea>
+        <input type="text" value={{$user->name}}></input>
     </div>
     <div>
         <label>Email</label>
         <input type="email" value="{{$user->email}}" disabled>
     </div>
     <div>
-        <label>Ngày tạo</label>
-        <label>{{$user->created_at}}</label>
+        <label>Avatar</label>
+        <input type="text" value="{{$user->avatar}}"></input>
+    </div>
+    <div>
+        <label>Mô tả: </label>
+        <input type="text" value="{{$user->description}}"></input>
+    </div>
+    <div>
+        <label>Vai trò</label>
+        <input type="text" value="{{$user->role}}" disabled>
     </div>
 </form>
+<div>
+    <a>Danh sách timesheet</a>
+    <a>Sửa thông tin</a>
+    <a>Đổi mật khẩu</a>
+    <a href="{{ route('login-form') }}">Đăng xuất</a>
+</div>
 @endsection

@@ -14,11 +14,9 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         $credentials = $request->only('email', 'password');
-        $user = User::where([
-            ['email', '=', $credentials['email']],
-            ['password', '=', $credentials['password']]
-        ])->first();
-        if ($user) {
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && Hash::check($credentials['password'], $user->password)) {
             session(['user' => $user->id]);
             return redirect()->route('profile', ['user' => $user]);
         } else {
