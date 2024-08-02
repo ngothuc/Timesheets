@@ -3,21 +3,15 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\UserController;
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login-form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/profile/{user}', [LoginController::class, 'showProfile'])->name('profile');
+Route::get('/profile', [LoginController::class, 'showProfile'])->name('profile');
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register-form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm'])->name('change-password-form');
+Route::put('/change-password', [PasswordController::class, 'changePassword'])->name('change-password');

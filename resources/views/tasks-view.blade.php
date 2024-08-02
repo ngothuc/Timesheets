@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('nav-bar')
+@section('title')
 <h1>Danh sách công việc</h1>
 @endsection
 

@@ -30,7 +30,7 @@
 <div>
     <a>Danh sách timesheet</a>
     <a>Sửa thông tin</a>
-    <a>Đổi mật khẩu</a>
-    <a href="{{ route('login-form') }}">Đăng xuất</a>
+    <a href="{{ route('change-password-form')}}">Đổi mật khẩu</a>
+    <a href="{{ route('logout') }}">Đăng xuất</a>
 </div>
 @endsection

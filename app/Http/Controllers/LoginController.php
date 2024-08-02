@@ -26,12 +26,7 @@ class LoginController extends Controller
     public function showProfile(User $user)
     {
         return view('profile', [
-            'user' => $user,
+            'user' => User::find(session('user')),
         ]);
-    }
-
-    public function main() {
-        $hashedValue = Hash::make('123456');
-        echo $hashedValue; // Output: $2y$10$u5b538Z99W.31j8w...
     }
 }
