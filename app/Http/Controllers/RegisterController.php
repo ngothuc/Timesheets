@@ -17,11 +17,12 @@ class RegisterController extends Controller
             'email' =>'required|email|unique:users',
             'password' =>'required|'
         ]);
+        $data['password'] = bcrypt($data['password']);
 
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password =  bcrypt($data['password']);
+        $user = User::create($data);
+        // $user->name = $data['name'];
+        // $user->email = $data['email'];
+        // $user->password =  bcrypt($data['password']);
         $user->save();
         return redirect()->route('login-form')->with('success', 'Đăng ký thành công');
     }
