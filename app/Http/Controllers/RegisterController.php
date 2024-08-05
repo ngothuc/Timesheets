@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -11,12 +12,8 @@ class RegisterController extends Controller
         return view('register');
     }
 
-    public function register(Request $request) {
-        $data = $request->validate([
-            'name' =>'required',
-            'email' =>'required|email|unique:users',
-            'password' =>'required|'
-        ]);
+    public function register(RegisterRequest $request) {
+        $data = $request;
         $data['password'] = bcrypt($data['password']);
 
         $user = User::create($data);

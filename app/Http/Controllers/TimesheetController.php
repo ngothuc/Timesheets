@@ -25,11 +25,7 @@ class TimesheetController extends Controller
     }
 
     public function store(Request $request) {
-        $data = $request->validate([
-            'date' => ['required', 'date'],
-            'difficulties' => ['nullable','string'],
-            'next_plan' => ['nullable','string'],
-        ]);
+        $data = $request;
         $user = UserController::getLoginUser();
         $data['user_id'] = $user->id;
         $timesheet = Timesheet::create($data);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,17 +12,12 @@ class PasswordController extends Controller
         return view('change-password');
     }
 
-    public function changePassword(Request $request) {
+    public function changePassword(ChangePasswordRequest $request) {
         $user = User::find(session('user'));
         
         if (!$user) {
             return redirect()->route('login-form')->withErrors(['message' => 'Bạn chưa đăng nhập']);
         }
-
-        $request->validate([
-            'old-password' => 'required',
-            'new-password' => 'required',
-        ]);
 
         if (!Hash::check($request->input('old-password'), $user->password)) {
             return redirect()->back()->withErrors(['old-password' => 'Mật khẩu cũ không đúng']);

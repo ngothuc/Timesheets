@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -18,10 +19,7 @@ class UserController extends Controller
         return redirect()->route('login-form');
     }
 
-    public function updateProfile(Request $request) {
-        $this->validate($request, [
-            'name' =>'required',
-        ]);
+    public function updateProfile(UpdateProfileRequest $request) {
 
         $user = UserController::getLoginUser();
         $user->name = $request->name;

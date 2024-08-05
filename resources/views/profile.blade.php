@@ -10,7 +10,7 @@
     @method('PUT')
     <div>
         <label>Tên</label>
-        <input type="text" id="name" name="name" value={{$user->name}}></input>
+        <input type="text" id="name" name="name" value='{{$user->name}}'></input>
     </div>
     <div>
         <label>Email</label>
