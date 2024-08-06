@@ -8,7 +8,6 @@
 @foreach ($timesheets as $timesheet)
 <div>
     <a href="{{ route('tasks-list', ['timesheet' => $timesheet]) }}">{{ $timesheet->date }}</a>
-    <a>Sửa</a>
     <a>Xóa</a>
 </div>
 @endforeach

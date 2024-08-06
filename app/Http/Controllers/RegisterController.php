@@ -17,9 +17,6 @@ class RegisterController extends Controller
         $data['password'] = bcrypt($data['password']);
 
         $user = User::create($data);
-        // $user->name = $data['name'];
-        // $user->email = $data['email'];
-        // $user->password =  bcrypt($data['password']);
         $user->save();
         return redirect()->route('login-form')->with('success', 'Đăng ký thành công');
     }
