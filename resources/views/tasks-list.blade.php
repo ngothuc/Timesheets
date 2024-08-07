@@ -35,12 +35,15 @@
     @foreach ($tasks as $task)
     <div>
         <tr>
-            <td><a>{{$task->id}}</a></td>
-            <td><a>{{$task->content}}</a></td>
-            <td><a>{{$task->time_spent}}</a></td>
+            <td>{{$task->id}}</td>
+            <td>{{$task->content}}</td>
+            <td>{{$task->time_spent}}</td>
+            <td><a href="{{route('task-view', ['task' => $task])}}">Chi tiết</a></td>
         </tr>
     </div>
     @endforeach
 </table>
 <a href="{{route('timesheets-list')}}">Trở về</a>
+<a href="{{route('task-create', ['timesheet' => $timesheet])}}">Tạo task</a>
+
 @endsection

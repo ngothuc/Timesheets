@@ -24,3 +24,8 @@ Route::delete('/{timesheet}/delete', [TimesheetController::class, 'delete'])->na
 Route::get('/{timesheet}/tasks', [TaskController::class, 'showTasks'])->name('tasks-list');
 Route::get('/timesheets/create', [TimesheetController::class, 'create'])->name('timesheets-create');
 Route::post('/timesheets', [TimesheetController::class,'store'])->name('timesheets-store');
+Route::get('{task}/task-view', [TaskController::class, 'taskView'])->name('task-view');
+Route::put('/update/{task}', [TaskController::class, 'update'])->name('task-update');
+Route::delete('/delete/{task}', [TaskController::class, 'delete'])->name('task-delete');
+Route::get('/{timesheet}/task/create', [TaskController::class, 'create'])->name('task-create');
+Route::post('/tasks/store/{timesheet}', [TaskController::class, 'store'])->name('task-store');

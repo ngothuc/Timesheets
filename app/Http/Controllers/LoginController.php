@@ -24,7 +24,7 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
         }
     }
-    public function showProfile(User $user)
+    public function showProfile()
     {
         return view('profile', [
             'user' => User::find(session('user')),

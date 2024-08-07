@@ -40,7 +40,7 @@ class TimesheetController extends Controller
         $data = $request->validated();
         $data['user_id'] = $user->id;
         $this->timesheetRepo->create($data);
-
+        return redirect()->route('timesheets-list');
     }
     public function update($id, UpdateTimesheetRequest $request) {
 
