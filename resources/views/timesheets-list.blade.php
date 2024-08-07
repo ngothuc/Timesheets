@@ -8,7 +8,13 @@
 @foreach ($timesheets as $timesheet)
 <div>
     <a href="{{ route('tasks-list', ['timesheet' => $timesheet]) }}">{{ $timesheet->date }}</a>
-    <a>Xóa</a>
+    <div>
+        <form action="{{ route('timesheet-delete', $timesheet->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
+    </div>
 </div>
 @endforeach
 <div>

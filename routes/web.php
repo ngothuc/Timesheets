@@ -19,6 +19,8 @@ Route::get('/change-password', [PasswordController::class, 'showChangePasswordFo
 Route::put('/change-password', [PasswordController::class, 'changePassword'])->name('change-password');
 Route::put('/profile', [UserController::class, 'updateProfile'])->name('update-profile');
 Route::get('/timesheets', [TimesheetController::class, 'showListTimesheets'])->name('timesheets-list');
+Route::put('/{timesheet}/update', [TimesheetController::class, 'update'])->name('timesheet-update');
+Route::delete('/{timesheet}/delete', [TimesheetController::class, 'delete'])->name('timesheet-delete');
 Route::get('/{timesheet}/tasks', [TaskController::class, 'showTasks'])->name('tasks-list');
 Route::get('/timesheets/create', [TimesheetController::class, 'create'])->name('timesheets-create');
 Route::post('/timesheets', [TimesheetController::class,'store'])->name('timesheets-store');

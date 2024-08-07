@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTimesheetRequest;
+use App\Http\Requests\UpdateTimesheetRequest;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Timesheet;
@@ -40,5 +41,18 @@ class TimesheetController extends Controller
         $data['user_id'] = $user->id;
         $this->timesheetRepo->create($data);
 
+    }
+    public function update($id, UpdateTimesheetRequest $request) {
+
+        $request->validated();
+        $timesheet = $this->timesheetRepo->find($id);
+        $timesheet->update($request->all());
+
+        return redirect()->route('tasks-list', ['timesheet' => $timesheet]);
+    }
+    public function delete($id) {
+        $timesheet = $this->timesheetRepo->find($id);
+        $timesheet->delete();
+        return redirect()->route('timesheets-list');
     }
 }

@@ -2,18 +2,22 @@
 
 @section('title')
 <div>
-    <h1>Danh sách công việc ngày {{ $timesheet->date }}</h1>
+    <h1>Chi tiết timesheet</h1>
 </div>
-<form method="POST" action={{route('')}}>
+<form method="POST" action="{{route('timesheet-update', ['timesheet' => $timesheet])}}">
     @csrf
     @method('PUT')   
     <div>
-        <label for="difficulty">Khó khăn</label>
-        <textarea id="difficulty" name="difficulty" readonly>{{$timesheet->difficulty}}</textarea>
+        <label for="date">Ngày</label>
+        <input type="date" id="date" name="date" value="{{$timesheet->date}}">
     </div>
     <div>
-        <label for="next_plan">Khó khăn</label>
-        <textarea id="next_plan" name="next_plan" readonly>{{$timesheet->next_plan}}</textarea>
+        <label for="difficulties">Khó khăn</label>
+        <textarea id="difficulties" name="difficulties">{{$timesheet->difficulties}}</textarea>
+    </div>
+    <div>
+        <label for="next_plan">Kế hoạch</label>
+        <textarea id="next_plan" name="next_plan">{{$timesheet->next_plan}}</textarea>
     </div>
     <div>
         <button type="submit">Sửa timesheet</button>
