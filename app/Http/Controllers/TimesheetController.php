@@ -35,12 +35,11 @@ class TimesheetController extends Controller
     }
 
     public function store(StoreTimesheetRequest $request) {
-
         $user = UserController::getLoginUser();
         $data = $request->validated();
         $data['user_id'] = $user->id;
-        $this->timesheetRepo->create($data);
-        return redirect()->route('timesheets-list');
+        $timesheet = $this->timesheetRepo->create($data);
+        return redirect()->route('tasks-list', ['timesheet' => $timesheet->id]);
     }
     public function update($id, UpdateTimesheetRequest $request) {
 

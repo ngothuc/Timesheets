@@ -18,14 +18,18 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm'])->name('change-password-form');
 Route::put('/change-password', [PasswordController::class, 'changePassword'])->name('change-password');
 Route::put('/profile', [UserController::class, 'updateProfile'])->name('update-profile');
+
+
 Route::get('/timesheets', [TimesheetController::class, 'showListTimesheets'])->name('timesheets-list');
-Route::put('/{timesheet}/update', [TimesheetController::class, 'update'])->name('timesheet-update');
-Route::delete('/{timesheet}/delete', [TimesheetController::class, 'delete'])->name('timesheet-delete');
-Route::get('/{timesheet}/tasks', [TaskController::class, 'showTasks'])->name('tasks-list');
+Route::put('/timesheets/{timesheet}/update', [TimesheetController::class, 'update'])->name('timesheet-update');
+Route::delete('/timesheets/{timesheet}/delete', [TimesheetController::class, 'delete'])->name('timesheet-delete');
 Route::get('/timesheets/create', [TimesheetController::class, 'create'])->name('timesheets-create');
-Route::post('/timesheets', [TimesheetController::class,'store'])->name('timesheets-store');
-Route::get('{task}/task-view', [TaskController::class, 'taskView'])->name('task-view');
-Route::put('/update/{task}', [TaskController::class, 'update'])->name('task-update');
-Route::delete('/delete/{task}', [TaskController::class, 'delete'])->name('task-delete');
-Route::get('/{timesheet}/task/create', [TaskController::class, 'create'])->name('task-create');
-Route::post('/tasks/store/{timesheet}', [TaskController::class, 'store'])->name('task-store');
+Route::post('/timesheets', [TimesheetController::class, 'store'])->name('timesheets-store');
+
+
+Route::get('/timesheets/{timesheet}/tasks', [TaskController::class, 'showTasks'])->name('tasks-list');
+Route::get('/tasks/{task}/view', [TaskController::class, 'taskView'])->name('task-view');
+Route::put('/tasks/{task}/update', [TaskController::class, 'update'])->name('task-update');
+Route::delete('/tasks/{task}/delete', [TaskController::class, 'delete'])->name('task-delete');
+Route::get('/timesheets/{timesheet}/tasks/create', [TaskController::class, 'create'])->name('task-create');
+Route::post('/timesheets/{timesheet}/tasks/store', [TaskController::class, 'store'])->name('task-store');

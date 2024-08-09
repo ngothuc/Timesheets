@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Timesheet;
+use App\Models\User;
 
 class UpdateTimesheetRequest extends FormRequest
 {
@@ -11,7 +13,12 @@ class UpdateTimesheetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $timesheet = Timesheet::find($this->route('timesheet'));
+        
+        $userId = session('user');
+        $user = User::find($userId);
+
+        return $user->can('update', $timesheet);
     }
 
     /**

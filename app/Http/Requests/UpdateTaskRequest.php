@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\User;
+use App\Models\Timesheet;
+use App\Models\Task;
 
 class UpdateTaskRequest extends FormRequest
 {
@@ -11,7 +14,12 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $userId = session('user');
+        $user = User::find($userId);
+
+        $task = Task::find($this->route('task'));
+
+        return $user->can('update', $task);
     }
 
     /**

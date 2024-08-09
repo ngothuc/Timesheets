@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Timesheet;
+use App\Models\User;
 
 class StoreTimesheetRequest extends FormRequest
 {
@@ -11,7 +13,9 @@ class StoreTimesheetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $userId = session('user');
+        $user = User::find($userId);
+        return $user->can('create', Timesheet::class);
     }
 
     /**
