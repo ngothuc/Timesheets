@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTimesheetRequest;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Timesheet;
+use App\Services\UserService;
 
 class TimesheetController extends Controller
 {
@@ -17,7 +18,7 @@ class TimesheetController extends Controller
     }
 
     public function getListTimesheets() {
-        $user = UserController::getLoginUser();
+        $user = UserService::getLoginUser();
         $timesheets = $this->timesheetRepo->all()
         ->where('user_id', $user->id);
         return $timesheets;
@@ -25,7 +26,7 @@ class TimesheetController extends Controller
 
     public function showListTimesheets() {
         return view('timesheets-list', [
-            'user' => UserController::getLoginUser(),
+            'user' => UserService::getLoginUser(),
             'timesheets' => $this->getListTimesheets(),
         ]);
     }
@@ -35,7 +36,7 @@ class TimesheetController extends Controller
     }
 
     public function store(StoreTimesheetRequest $request) {
-        $user = UserController::getLoginUser();
+        $user = UserService::getLoginUser();
         $data = $request->validated();
         $data['user_id'] = $user->id;
         $timesheet = $this->timesheetRepo->create($data);

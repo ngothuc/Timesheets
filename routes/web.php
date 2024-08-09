@@ -9,14 +9,14 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TimesheetController;
 
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login-form');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/profile', [LoginController::class, 'showProfile'])->name('profile');
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register-form');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/', [UserController::class, 'showLoginForm'])->name('login-form');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register-form');
+Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm'])->name('change-password-form');
-Route::put('/change-password', [PasswordController::class, 'changePassword'])->name('change-password');
+Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('change-password-form');
+Route::put('/change-password', [UserController::class, 'changePassword'])->name('change-password');
 Route::put('/profile', [UserController::class, 'updateProfile'])->name('update-profile');
 
 

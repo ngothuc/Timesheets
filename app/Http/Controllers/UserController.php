@@ -2,31 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    public static function getLoginUser() {
-        $userId = session('user');
-        $user = User::find($userId);
-        return $user;
+    protected $userService;
+
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
+    }
+
+    public function login(LoginRequest $request) {
+        return $this->userService->login($request);
+    }
+    public function showLoginForm() {
+        return view('login');
+    }
+    public function showProfile()
+    {
+        return view('profile', [
+            'user' => $this->userService->getLoginUser(),
+        ]);
     }
 
     public function logout() {
-        session()->forget('user');
-        return redirect()->route('login-form');
+        return $this->userService->logout();
     }
 
     public function updateProfile(UpdateProfileRequest $request) {
-
-        $user = UserController::getLoginUser();
-        $user->name = $request->name;
-        $user->description = $request->description;
-        $user->avatar = $request->avatar;
-        $user->save();
-
-        return redirect()->route('profile');
+        return $this->userService->updateProfile($request);
     }
+    public function showChangePasswordForm() {
+        return view('change-password');
+    }
+    public function changePassword(ChangePasswordRequest $request) {
+        return $this->userService->changePassword($request);
+    }
+    public function showRegisterForm() {
+        return view('register');
+    }
+    public function register(RegisterRequest $request) {
+        return $this->userService->register($request);
+    }
+
 }
