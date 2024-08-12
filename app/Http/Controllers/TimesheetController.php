@@ -7,21 +7,19 @@ use App\Http\Requests\UpdateTimesheetRequest;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Timesheet;
+use App\Services\TimesheetService;
 use App\Services\UserService;
 
 class TimesheetController extends Controller
 {
-    protected $timesheetRepo;
+    protected $timesheetService;
 
-    public function __construct(TimesheetRepositoryInterface $timesheetRepo) {
-        $this->timesheetRepo = $timesheetRepo;
+    public function __construct(TimesheetService $timesheetService) {
+        $this->timesheetService = $timesheetService;
     }
 
     public function getListTimesheets() {
-        $user = UserService::getLoginUser();
-        $timesheets = $this->timesheetRepo->all()
-        ->where('user_id', $user->id);
-        return $timesheets;
+        return $this->timesheetService->getListTimesheets();
     }
 
     public function showListTimesheets() {
@@ -36,23 +34,13 @@ class TimesheetController extends Controller
     }
 
     public function store(StoreTimesheetRequest $request) {
-        $user = UserService::getLoginUser();
-        $data = $request->validated();
-        $data['user_id'] = $user->id;
-        $timesheet = $this->timesheetRepo->create($data);
-        return redirect()->route('tasks-list', ['timesheet' => $timesheet->id]);
+       return $this->timesheetService->store($request);
     }
     public function update($id, UpdateTimesheetRequest $request) {
-
-        $request->validated();
-        $timesheet = $this->timesheetRepo->find($id);
-        $timesheet->update($request->all());
-
-        return redirect()->route('tasks-list', ['timesheet' => $timesheet]);
+        return $this->timesheetService->update($id, $request);
     }
     public function delete($id) {
-        $timesheet = $this->timesheetRepo->find($id);
-        $timesheet->delete();
-        return redirect()->route('timesheets-list');
+        return $this->timesheetService->delete($id);
     }
+
 }
