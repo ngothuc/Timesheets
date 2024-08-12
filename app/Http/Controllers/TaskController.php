@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Requests\StoreTaskRequest;
 use App\Services\TaskService;
 
+
 class TaskController extends Controller
 {
     protected $taskService;
@@ -19,7 +20,10 @@ class TaskController extends Controller
 
     public function showTasks(Timesheet $timesheet)
     {
-        return $this->taskService->showTasks($timesheet);
+        return view('tasks-list', [
+            'timesheet' => $timesheet,
+            'tasks' => $this->taskService->getTasksByTimesheet($timesheet),
+        ]);
     }
 
     public function taskView(Task $task) {
@@ -28,16 +32,19 @@ class TaskController extends Controller
         ]);
     }
     public function update($id, UpdateTaskRequest $request) {
-        return $this->taskService->update($id, $request);
+        $task = $this->taskService->update($id, $request);
+        return redirect()->route('task-view', ['task' => $task]);
     }
-    public function delete($id) {
-        return $this->taskService->delete($id);
+    public function delete($id) {       
+        $timesheet = $this->taskService->delete($id);
+        return redirect()->route('tasks-list', ['timesheet' => $timesheet]);
     }
     public function create(Timesheet $timesheet) {
         return view('task-create', ['timesheet' => $timesheet]);
     }
 
     public function store(StoreTaskRequest $request, Timesheet $timesheet) {
-        return $this->taskService->store($request, $timesheet);
+        $task = $this->taskService->store($request, $timesheet);
+        return redirect()->route('task-view', ['task' => $task]);
     }
 }

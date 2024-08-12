@@ -17,19 +17,17 @@ class TaskService {
         $this->taskRepository = $taskRepository;
         $this->timesheetRepository = $timesheetRepository;
     }
-    public function showTasks(Timesheet $timesheet) {
-        return view('tasks-list', [
-            'timesheet' => $timesheet,
-            'tasks' => $this->taskRepository->all()
-                    ->where('timesheet_id', $timesheet->id),
-        ]);
+
+    public function getTasksByTimesheet(Timesheet $timesheet) {
+        return $this->taskRepository->all()
+                ->where('timesheet_id', $timesheet->id);
     }
 
     public function update($id, UpdateTaskRequest $request) {
         $task = $this->taskRepository->find($id);
         $task->update($request->all());
         $this->updateTimesheetUpdateTime($task->timesheet_id);
-        return redirect()->route('task-view', ['task' => $task]);
+        return $task;
     }
 
     public function delete($id) {
@@ -37,7 +35,7 @@ class TaskService {
         $timesheet = $task->timesheet_id;
         $task->delete();
         $this->updateTimesheetUpdateTime($task->timesheet_id);
-        return redirect()->route('tasks-list', ['timesheet' => $timesheet]);
+        return $timesheet;
     }
 
     public function store(StoreTaskRequest $request, Timesheet $timesheet) {
@@ -45,7 +43,7 @@ class TaskService {
         $data['timesheet_id'] = $timesheet->id;
         $task = $this->taskRepository->create($data);
         $this->updateTimesheetUpdateTime($task->timesheet_id);
-        return redirect()->route('task-view', ['task' => $task]);
+        return $task;
     }
     private function updateTimesheetUpdateTime($timesheetId) {
         $timesheet = $this->timesheetRepository->find($timesheetId);
