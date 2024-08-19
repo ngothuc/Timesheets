@@ -39,7 +39,7 @@ class UserController extends Controller
         return $this->userService->updateProfile($request);
     }
     public function showChangePasswordForm() {
-        return view('change-password');
+        return view('change-password', ['user' => $this->userService->getLoginUser()]);
     }
     public function changePassword(ChangePasswordRequest $request) {
         return $this->userService->changePassword($request);

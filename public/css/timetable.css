@@ -1,0 +1,16 @@
+.title {
+    text-align: center;
+}
+
+h1 {
+    color: orange;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.content > div {
+    text-align: center;
+}

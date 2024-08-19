@@ -14,30 +14,36 @@ class TimesheetController extends Controller
 {
     protected $timesheetService;
 
-    public function __construct(TimesheetService $timesheetService) {
+    public function __construct(TimesheetService $timesheetService)
+    {
         $this->timesheetService = $timesheetService;
     }
 
-    public function showListTimesheets() {
+    public function showListTimesheets()
+    {
         return view('timesheets-list', [
             'user' => UserService::getLoginUser(),
             'timesheets' => $this->timesheetService->getListTimesheets(),
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('timesheets-create');
     }
 
-    public function store(StoreTimesheetRequest $request) {
-       $timesheet = $this->timesheetService->store($request);
-       return redirect()->route('tasks-list', ['timesheet' => $timesheet->id]);
+    public function store(StoreTimesheetRequest $request)
+    {
+        $timesheet = $this->timesheetService->store($request);
+        return redirect()->route('tasks-list', ['timesheet' => $timesheet->id]);
     }
-    public function update($id, UpdateTimesheetRequest $request) {
+    public function update($id, UpdateTimesheetRequest $request)
+    {
         $timesheet = $this->timesheetService->update($id, $request);
         return redirect()->route('tasks-list', ['timesheet' => $timesheet]);
     }
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->timesheetService->delete($id);
         return redirect()->route('timesheets-list');
     }

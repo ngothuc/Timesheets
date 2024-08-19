@@ -51,4 +51,11 @@ class TaskService {
         $timesheet->save();
     }
 
+    public function getTimesheetByDate($date) {
+        return $this->timesheetRepository
+                    ->all()
+                    ->where('date', $date)
+                    ->first();
+    }
+
 }

@@ -26,10 +26,11 @@ Route::delete('/timesheets/{timesheet}/delete', [TimesheetController::class, 'de
 Route::get('/timesheets/create', [TimesheetController::class, 'create'])->name('timesheets-create');
 Route::post('/timesheets', [TimesheetController::class, 'store'])->name('timesheets-store');
 
-
 Route::get('/timesheets/{timesheet}/tasks', [TaskController::class, 'showTasks'])->name('tasks-list');
 Route::get('/tasks/{task}/view', [TaskController::class, 'taskView'])->name('task-view');
 Route::put('/tasks/{task}/update', [TaskController::class, 'update'])->name('task-update');
 Route::delete('/tasks/{task}/delete', [TaskController::class, 'delete'])->name('task-delete');
 Route::get('/timesheets/{timesheet}/tasks/create', [TaskController::class, 'create'])->name('task-create');
 Route::post('/timesheets/{timesheet}/tasks/store', [TaskController::class, 'store'])->name('task-store');
+
+Route::get('/timesheets/tasks/{date}', [TaskController::class, 'getTasksByDate'])->name('timetable');
