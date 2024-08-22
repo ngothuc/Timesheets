@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login-form');
 Route::post('/login', [UserController::class, 'login'])->name('login');
