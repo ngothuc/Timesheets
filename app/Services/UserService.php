@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepository;
@@ -33,6 +34,19 @@ class UserService {
             return redirect()->route('login-form');
         }
     }
+
+    public function adminLogin(AdminLoginRequest $request) {
+        $data = $request->all();
+        $user = $this->userRepository->findByEmail($data['email']);
+
+        if ($user && Hash::check($data['password'], $user->password) && $user->role === 'admin') {
+            session(['user' => $user->id]);
+            return redirect()->route('admin-dashboard');
+        } else {
+            return redirect()->route('admin-login-form');
+        }
+    }
+
     public function logout() {
         session()->forget('user');
         return redirect()->route('login-form');
