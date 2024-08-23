@@ -14,4 +14,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface {
         return $this->model::where('email', $email)->first();
     }
 
+    public function all($perPage = 10) {
+        return $this->model->paginate($perPage);
+    }
+
 }

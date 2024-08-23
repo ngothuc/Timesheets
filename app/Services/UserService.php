@@ -9,12 +9,15 @@ use App\Repositories\User\UserRepository;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Repositories\Timesheet\TimesheetRepository;
 use Illuminate\Support\Facades\Hash;
 
 class UserService {
     protected $userRepository;
-    public function __construct(UserRepository $userRepo) {
+    protected $timesheetRepository;
+    public function __construct(UserRepository $userRepo, TimesheetRepository $timesheetRepository) {
         $this->userRepository = $userRepo;
+        $this->timesheetRepository = $timesheetRepository;
     }
     public static function getLoginUser() {
         $userId = session('user');
@@ -79,5 +82,25 @@ class UserService {
         $user->save();
         return redirect()->route('login-form')->with('success', 'Đăng ký thành công');
     }
+
+    public function getAllUsers() {
+        $users = $this->userRepository->all(10);
+        foreach ($users as $user) {
+            $user->late_count = $this->calculateLateCount($user->id);
+        }
+        return $users;
+    }
+
+    private function calculateLateCount($userId) {
+        $timesheetsList = $this->timesheetRepository->findByUserId($userId);
+        $lateCount = 0;
+        foreach ($timesheetsList as $timesheet) {
+            if ($timesheet->created_at && $timesheet->updated_at > $timesheet->date) {
+                $lateCount++;
+            }
+        }
+        return $lateCount;
+    }
+
 
 }

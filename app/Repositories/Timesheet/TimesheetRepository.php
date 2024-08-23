@@ -10,4 +10,9 @@ class TimesheetRepository extends BaseRepository implements TimesheetRepositoryI
     public function __construct(Timesheet $model) {
         parent::__construct($model);
     }
+
+    public function findByUserId($userId) {
+        return $this->model::where('user_id', $userId)->get();
+    }
+
 }

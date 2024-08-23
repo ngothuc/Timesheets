@@ -22,7 +22,15 @@ class AdminController extends UserController {
     }
 
     public function showDashboard() {
-        return view('admin.admin-dashboard');
+        return view('admin.admin-dashboard', ['user' => $this->userService->getLoginUser()]);
+    }
+
+    public function showDashboardUsers() {
+        $usersList = $this->userService->getAllUsers();
+        return view('admin.users-manager', [
+            'admin' => $this->userService->getLoginUser(),
+            'users' => $usersList,
+        ]);
     }
 
 }
