@@ -30,14 +30,16 @@
                 <td class="px-6 py-4 border-b border-gray-200">{{ $user->created_at }}</td>
                 <td class="px-6 py-4 border-b border-gray-200">{{ $user->updated_at }}</td>
                 <td class="px-6 py-4 border-b border-gray-200">
-                    <form method="post">
+                    <form method="post" action="{{route('admin-reset-password')}}">
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        @method('PUT')
+                        <input type="hidden" name="userId" value="{{ $user->id }}">
                         <button type="submit" class="text-green-500 hover:text-green-700">Đặt lại mật khẩu</button>
                     </form>
-                    <form method="put">
-                    @csrf
-                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <form method="post" action="{{route('admin-delete-account')}}">
+                        @csrf  
+                        @method('delete')
+                        <input type="hidden" name="userId" value="{{ $user->id }}">
                         <button type="submit" class="text-red-500 hover:text-red-700">Xóa tài khoản</button>
                     </form>
                     

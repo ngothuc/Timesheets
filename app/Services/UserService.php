@@ -38,18 +38,6 @@ class UserService {
         }
     }
 
-    public function adminLogin(AdminLoginRequest $request) {
-        $data = $request->all();
-        $user = $this->userRepository->findByEmail($data['email']);
-
-        if ($user && Hash::check($data['password'], $user->password) && $user->role === 'admin') {
-            session(['user' => $user->id]);
-            return redirect()->route('admin-dashboard');
-        } else {
-            return redirect()->route('admin-login-form');
-        }
-    }
-
     public function logout() {
         session()->forget('user');
         return redirect()->route('login-form');
