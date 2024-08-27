@@ -13,5 +13,6 @@ class Task extends Model
         'content',
         'time_spent',
         'timesheet_id',
+        'completed',
     ];
 }

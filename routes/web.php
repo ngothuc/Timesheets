@@ -33,5 +33,6 @@ Route::put('/tasks/{task}/update', [TaskController::class, 'update'])->name('tas
 Route::delete('/tasks/{task}/delete', [TaskController::class, 'delete'])->name('task-delete');
 Route::get('/timesheets/{timesheet}/tasks/create', [TaskController::class, 'create'])->name('task-create');
 Route::post('/timesheets/{timesheet}/tasks/store', [TaskController::class, 'store'])->name('task-store');
+Route::put('/tasks/{task}/completed', [TaskController::class, 'completed'])->name('task-completed');
 
 Route::get('/timesheets/tasks/{date}', [TaskController::class, 'getTasksByDate'])->name('timetable');

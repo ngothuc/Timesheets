@@ -43,9 +43,9 @@
     </form>
 </div>
 <div class="text-center mt-8">
-    <a href="{{ route('timetable', ['date' => '2024-08-15']) }}" class="text-blue-500 hover:underline mx-2">Timetable</a>
-    <a href="{{ route('timesheets-list') }}" class="text-blue-500 hover:underline mx-2">Danh sách timesheet</a>
-    <a href="{{ route('change-password-form') }}" class="text-blue-500 hover:underline mx-2">Đổi mật khẩu</a>
-    <a href="{{ route('logout') }}" class="text-blue-500 hover:underline mx-2">Đăng xuất</a>
+    <a href="{{ route('timetable', ['date' => '2024-08-15']) }}" class="text-orange-500 hover:underline mx-2">Timetable</a>
+    <a href="{{ route('timesheets-list') }}" class="text-orange-500 hover:underline mx-2">Danh sách timesheet</a>
+    <a href="{{ route('change-password-form') }}" class="text-orange-500 hover:underline mx-2">Đổi mật khẩu</a>
+    <a href="{{ route('logout') }}" class="text-orange-500 hover:underline mx-2">Đăng xuất</a>
 </div>
 @endsection

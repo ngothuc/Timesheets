@@ -58,4 +58,15 @@ class TaskService {
                     ->first();
     }
 
+    public function find($id) {
+        return $this->taskRepository->find($id);
+    }
+
+    public function completed($id) {
+        $task = $this->find($id);
+        $task->completed =!$task->completed;
+        $this->updateTimesheetUpdateTime($task->timesheet_id);
+        $task->save();
+    }
+
 }

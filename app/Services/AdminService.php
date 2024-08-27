@@ -48,6 +48,4 @@ class AdminService {
         $user->delete();
     }
 
-
-
 }

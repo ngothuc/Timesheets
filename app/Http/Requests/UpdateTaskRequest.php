@@ -16,9 +16,7 @@ class UpdateTaskRequest extends FormRequest
     {
         $userId = session('user');
         $user = User::find($userId);
-
         $task = Task::find($this->route('task'));
-
         return $user->can('update', $task);
     }
 
