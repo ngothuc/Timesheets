@@ -21,10 +21,10 @@
                     <a href="#" class="block py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 text-white transition">Thông tin cá nhân</a>
                 </li>
                 <li>
-                    <a href="{{route('admin-dashboard-users')}}" class="block py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 text-white transition">Quản lý User</a>
+                    <a href="{{ route('admin-dashboard-users') }}" class="block py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 text-white transition">Quản lý User</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 text-white transition">Quản lý Timesheet</a>
+                    <a href="{{ route('timesheets-manager') }}" class="block py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 text-white transition">Quản lý Timesheet</a>
                 </li>
             </ul>
         </div>

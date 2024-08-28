@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
 use App\Models\Timesheet;
-use App\Models\Task;
+use App\Models\User;
 
-class UpdateTaskRequest extends FormRequest
+class UpdateTimesheetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
+        $timesheet = Timesheet::find($this->route('timesheet'));
+        
         $userId = session('user');
         $user = User::find($userId);
-        $task = Task::find($this->route('task'));
-        return $user->can('update', $task);
+
+        return $user->can('update', $timesheet);
     }
 
     /**
@@ -28,8 +29,8 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'string|required',
-            'time_spent' => 'numeric|required'
+            'difficulty' => 'string',
+            'next_plan' => 'string',
         ];
     }
 }

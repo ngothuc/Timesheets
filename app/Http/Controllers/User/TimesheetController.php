@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\StoreTimesheetRequest;
-use App\Http\Requests\UpdateTimesheetRequest;
+use App\Http\Requests\User\StoreTimesheetRequest;
+use App\Http\Requests\User\UpdateTimesheetRequest;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Timesheet;

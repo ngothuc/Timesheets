@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Task;
 use App\Models\User;
+use App\Models\Timesheet;
+use App\Models\Task;
 
-class StoreTaskRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +16,8 @@ class StoreTaskRequest extends FormRequest
     {
         $userId = session('user');
         $user = User::find($userId);
-        return $user->can('create', Task::class);
+        $task = Task::find($this->route('task'));
+        return $user->can('update', $task);
     }
 
     /**
@@ -26,8 +28,8 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required',
-            'time_spent' => 'required',
+            'content' => 'string|required',
+            'time_spent' => 'numeric|required'
         ];
     }
 }

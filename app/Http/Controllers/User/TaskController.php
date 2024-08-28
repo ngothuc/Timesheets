@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\Timesheet;
 use App\Models\Task;
-use App\Http\Requests\UpdateTaskRequest;
-use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\User\UpdateTaskRequest;
+use App\Http\Requests\User\StoreTaskRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Services\TaskService;
 use App\Services\UserService;

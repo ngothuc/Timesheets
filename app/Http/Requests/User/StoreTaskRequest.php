@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Timesheet;
+use App\Models\Task;
 use App\Models\User;
 
-class StoreTimesheetRequest extends FormRequest
+class StoreTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreTimesheetRequest extends FormRequest
     {
         $userId = session('user');
         $user = User::find($userId);
-        return $user->can('create', Timesheet::class);
+        return $user->can('create', Task::class);
     }
 
     /**
@@ -26,9 +26,8 @@ class StoreTimesheetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => ['required', 'date'],
-            'difficulties' => ['nullable', 'string'],
-            'next_plan' => ['nullable', 'string'],
+            'content' => 'required',
+            'time_spent' => 'required',
         ];
     }
 }

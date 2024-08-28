@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
 
 use App\Services\UserService;
 use App\Services\AdminService;
 
-use App\Http\Requests\AdminLoginRequest;
+use App\Http\Requests\Admin\AdminLoginRequest;
 use App\Http\Requests\Admin\ResetPasswordRequest;
 use App\Http\Requests\Admin\DeleteAccountRequest;
 
@@ -49,6 +49,18 @@ class AdminController extends UserController {
     public function deleteAccount(DeleteAccountRequest $request) {
         $this->adminService->deleteAccount($request);
         return redirect()->route('admin-dashboard-users');
+    }
+
+    public function showTimesheetManager() {
+        $timesheets = $this->adminService->getAllTimesheets();
+        foreach ($timesheets as $timesheet) {
+            $user = $this->userService->getUserById($timesheet->user_id);
+            $timesheet->user_name = $user->name;
+            $timesheet->email = $user->email;
+        }
+        return view('admin.timesheets-manager', [
+            'timesheets' => $timesheets
+        ]);
     }
 
 }

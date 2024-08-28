@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
-use App\Http\Requests\StoreTimesheetRequest;
-use App\Http\Requests\UpdateTimesheetRequest;
+use App\Http\Requests\User\StoreTimesheetRequest;
+use App\Http\Requests\User\UpdateTimesheetRequest;
 
 class TimesheetService
 {

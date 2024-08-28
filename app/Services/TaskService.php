@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\User\StoreTaskRequest;
+use App\Http\Requests\User\UpdateTaskRequest;
 use App\Models\Timesheet;
 use App\Repositories\Task\TaskRepositoryInterface;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;

@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Http\Requests\LoginRequest;
+use App\Models\Timesheet;
+use App\Models\User;
 
-class AdminLoginRequest extends FormRequest
+class StoreTimesheetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        $userId = session('user');
+        $user = User::find($userId);
+        return $user->can('create', Timesheet::class);
     }
 
     /**
@@ -23,8 +26,9 @@ class AdminLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
+            'date' => ['required', 'date'],
+            'difficulties' => ['nullable', 'string'],
+            'next_plan' => ['nullable', 'string'],
         ];
     }
 }

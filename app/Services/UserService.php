@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Http\Requests\AdminLoginRequest;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\User\LoginRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepository;
-use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\User\UpdateProfileRequest;
+use App\Http\Requests\User\ChangePasswordRequest;
+use App\Http\Requests\User\RegisterRequest;
 use App\Repositories\Timesheet\TimesheetRepository;
 use Illuminate\Support\Facades\Hash;
 
@@ -83,12 +83,15 @@ class UserService {
         $timesheetsList = $this->timesheetRepository->findByUserId($userId);
         $lateCount = 0;
         foreach ($timesheetsList as $timesheet) {
-            if ($timesheet->created_at && $timesheet->updated_at > $timesheet->date) {
+            if ($timesheet->created_at && $timesheet->updated_at >= \Carbon\Carbon::parse($timesheet->date)->addDay()) {
                 $lateCount++;
             }
         }
         return $lateCount;
     }
 
+    public function getUserById($id) {
+        return $this->userRepository->find($id);
+    }
 
 }

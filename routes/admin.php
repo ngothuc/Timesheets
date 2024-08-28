@@ -9,3 +9,4 @@ Route::get('admin/dashboard', [AdminController::class, 'showDashboard'])->name('
 Route::get('admin/dashboard/users', [AdminController::class, 'showDashboardUsers'])->name('admin-dashboard-users');
 Route::put('admin/dashboard/resetPassword', [AdminController::class, 'resetPassword'])->name('admin-reset-password');
 Route::delete('admin/dashboard/deleteAccount', [AdminController::class, 'deleteAccount'])->name('admin-delete-account');
+Route::get('admin/timesheets', [AdminController::class, 'showTimesheetManager'])->name('timesheets-manager');

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-<img src="https://drive.google.com/file/d/1UPlVpPsE_Ffl4JFPjC4tpGvc7r38JEbn/view?usp=sharing">
+<img src="https://tiki.vn/blog/wp-content/uploads/2023/11/luu-y-khi-su-dung-coming-soon.jpeg">
 @endsection

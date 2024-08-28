@@ -6,7 +6,7 @@ use App\Repositories\User\UserRepository;
 use App\Repositories\Timesheet\TimesheetRepository;
 use App\Repositories\Task\TaskRepository;
 
-use App\Http\Requests\AdminLoginRequest;
+use App\Http\Requests\Admin\AdminLoginRequest;
 use App\Http\Requests\Admin\ResetPasswordRequest;
 use App\Http\Requests\Admin\DeleteAccountRequest;
 
@@ -46,6 +46,11 @@ class AdminService {
         $userId = $request->userId;
         $user = $this->userRepository->find($userId);
         $user->delete();
+    }
+
+    public function getAllTimesheets() {
+        $timesheets = $this->timesheetRepository->all();
+        return $timesheets;
     }
 
 }

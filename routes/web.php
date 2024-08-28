@@ -2,13 +2,10 @@
 
 use App\Models\Timesheet;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\TimesheetController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\User\TaskController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\TimesheetController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login-form');
 Route::post('/login', [UserController::class, 'login'])->name('login');
