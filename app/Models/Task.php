@@ -15,4 +15,9 @@ class Task extends Model
         'timesheet_id',
         'completed',
     ];
+
+    public function timesheet() {
+        return $this->belongsTo(Timesheet::class);
+    }
+
 }

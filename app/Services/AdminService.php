@@ -49,7 +49,7 @@ class AdminService {
     }
 
     public function getAllTimesheets() {
-        $timesheets = $this->timesheetRepository->all();
+        $timesheets = $this->timesheetRepository->all(10);
         return $timesheets;
     }
 

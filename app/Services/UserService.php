@@ -72,7 +72,7 @@ class UserService {
     }
 
     public function getAllUsers() {
-        $users = $this->userRepository->all(10);
+        $users = $this->userRepository->all(5);
         foreach ($users as $user) {
             $user->late_count = $this->calculateLateCount($user->id);
         }

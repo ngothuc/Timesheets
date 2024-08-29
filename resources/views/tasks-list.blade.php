@@ -42,7 +42,7 @@
                     <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">ID</th>
                     <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Nội dung</th>
                     <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Thời gian</th>
-                    <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Hoàn thành</th>
+                    <th class="py-2 px-4 text-center text-sm font-medium text-gray-700">Hoàn thành</th>
                     <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Hành động</th>
                 </tr>
             </thead>
@@ -53,14 +53,16 @@
                     <td class="py-2 px-4">{{ $task->content }}</td>
                     <td class="py-2 px-4">{{ $task->time_spent }}</td>
                     <td class="py-2 px-4">
+                    <div class="flex justify-center">
                         @if($task->completed)
                         <button class="toggleCompleted text-green-500 font-bold" data-id="{{ $task->id }}" data-completed="1">✓</button>
                         @else
                         <button class="toggleCompleted text-red-500 font-bold" data-id="{{ $task->id }}" data-completed="0">✗</button>
                         @endif
+                    </div>
                     </td>
                     <td class="py-2 px-4">
-                        <div class="flex justify-end mt-4">
+                        <div class="flex justify-start mt-4">
                             <button class="showUpdateTaskForm bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                                 data-id="{{ $task->id }}"
                                 data-content="{{ $task->content }}"
@@ -76,10 +78,10 @@
         </table>
 
 
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-between mt-4">
+            <a href="{{ route('timesheets-list') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Trở về</a>
             <button id="showTaskForm" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Tạo task</button>
         </div>
-
 
         <form id="taskForm" method="post" action="{{route('task-store', ['timesheet' => $timesheet])}}" class="hidden mt-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
             @csrf

@@ -18,4 +18,13 @@ class Timesheet extends Model
     protected $dates = [
         'date',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
+
 }

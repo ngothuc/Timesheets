@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('style')
 <link rel="stylesheet" href="{{asset('/css/change-password.css')}}">
@@ -9,7 +9,7 @@
 <h1 class="text-center text-2xl font-bold mb-4">Đổi mật khẩu</h1>
 @endsection
 
-@section('content')
+@section('form-content')
 <div class="flex flex-col items-center">
     <img src="{{ $user->avatar }}" alt="Avatar" class="w-32 h-32 rounded-full object-cover shadow-md mb-4">
 </div>

@@ -15,4 +15,13 @@ class TimesheetRepository extends BaseRepository implements TimesheetRepositoryI
         return $this->model::where('user_id', $userId)->get();
     }
 
+    public function all( $perPage = 10 ) {
+        return Timesheet::with('user')->paginate($perPage);
+    }
+
+    public function where($attribute, $value) {
+        $timesheets = $this->model::all()->sortByDesc('date');
+        return $timesheets->where($attribute, $value);
+    }
+
 }

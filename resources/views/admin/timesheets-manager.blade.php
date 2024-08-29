@@ -23,8 +23,8 @@
             @endphp
             <tr class="{{ $rowClass }} border-t">
                 <td class="py-2 px-4 text-sm text-gray-900">{{ $timesheet->id }}</td>
-                <td class="py-2 px-4 text-sm text-gray-900 w-20">{{ $timesheet->user_name }}</td>
-                <td class="py-2 px-4 text-sm text-gray-900">{{ $timesheet->email }}</td>
+                <td class="py-2 px-4 text-sm text-gray-900 w-20">{{ $timesheet->user->name }}</td>
+                <td class="py-2 px-4 text-sm text-gray-900">{{ $timesheet->user->email }}</td>
                 <td class="py-2 px-4 text-sm text-gray-900 w-30">{{ $timesheet->date }}</td>
                 <td class="py-2 px-4 text-sm text-gray-900">{{ $timesheet->difficulties }}</td>
                 <td class="py-2 px-4 text-sm text-gray-900">{{ $timesheet->next_plan }}</td>
@@ -33,5 +33,10 @@
             @endforeach
         </tbody>
     </table>
+
+    <nav class="mt-4">
+        {{ $timesheets->links() }}
+    </nav>
+
 </div>
 @endsection

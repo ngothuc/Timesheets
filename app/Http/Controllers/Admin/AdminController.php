@@ -52,12 +52,8 @@ class AdminController extends UserController {
     }
 
     public function showTimesheetManager() {
+
         $timesheets = $this->adminService->getAllTimesheets();
-        foreach ($timesheets as $timesheet) {
-            $user = $this->userService->getUserById($timesheet->user_id);
-            $timesheet->user_name = $user->name;
-            $timesheet->email = $user->email;
-        }
         return view('admin.timesheets-manager', [
             'timesheets' => $timesheets
         ]);

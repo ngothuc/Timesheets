@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Timesheet\TimesheetRepositoryInterface;
 use App\Http\Requests\User\StoreTimesheetRequest;
 use App\Http\Requests\User\UpdateTimesheetRequest;
+use App\Models\Timesheet;
 
 class TimesheetService
 {
@@ -18,10 +19,11 @@ class TimesheetService
     public function getListTimesheets()
     {
         $user = UserService::getLoginUser();
-        $timesheets = $this->timesheetRepository->all()
-        ->where('user_id', $user->id)
-        ->sortByDesc('date');
+        $timesheets = Timesheet::where('user_id', $user->id)
+        ->orderByDesc('date')
+        ->paginate(7);
         return $timesheets;
+
     }
 
     public function store(StoreTimesheetRequest $request)
